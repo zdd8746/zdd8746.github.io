@@ -8,13 +8,20 @@
 
   function stripLineNumbering(line) {
     let t = line.replace(/^\uFEFF/, "").trim();
-    for (let i = 0; i < 6 && t.length; i++) {
+    for (let i = 0; i < 14 && t.length; i++) {
       const prev = t;
       t = t
+        .replace(/^\s*\d{1,3}[.．]\s+/, "")
+        .replace(/^\s*\d{1,3}[.．](?=[\u4e00-\u9fff])/, "")
+        .replace(/^\s*\d{1,3}(?:[ \t\u00a0\u3000])+/, "")
+        .replace(/^\s*[\uFF10-\uFF19]{1,3}(?:[ \t\u00a0\u3000])+/, "")
+        .replace(/^\s*\d{1,2}\.\d{1,2}[.．]?\s+/, "")
+        .replace(/^\s*\d{1,2}\.\d{1,2}[.．]?(?=[\u4e00-\u9fff])/, "")
         .replace(/^\s*\d{1,3}、\s*/, "")
         .replace(/^\s*\d+\.\d+\.?\s*/, "")
         .replace(/^\s*[（(]\s*\d{1,3}\s*[）)]\s*/, "")
         .replace(/^\s*[（(][一二三四五六七八九十百千]+[）)]\s*/, "")
+        .replace(/^\s*[①②③④⑤⑥⑦⑧⑨⑩]\s*/, "")
         .replace(/^\s*[一二三四五六七八九十]+[、．]\s*/, "")
         .replace(/^\s*第[一二三四五六七八九十\d]+章[、．。\s]*/, "")
         .replace(/^\s*[（(]第[一二三四五六七八九十\d]+[章节条][）)]\s*/, "")
@@ -241,7 +248,8 @@
       ol.className = "md-panel-items";
       items.forEach((text) => {
         const li = document.createElement("li");
-        li.textContent = text;
+        const cleaned = stripLineNumbering(text);
+        li.textContent = cleaned.length >= 2 ? cleaned : text;
         ol.appendChild(li);
       });
       listHost.appendChild(ol);

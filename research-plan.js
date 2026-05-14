@@ -21,6 +21,14 @@
     return String(s ?? "").trim();
   }
 
+  /** 横向 Tab 文案：去掉大类名末尾的「需求」「导航」，避免与条数角标连读；条数角标已移除。 */
+  function tabRailLabel(majKey) {
+    let s = norm(majKey);
+    if (!s) return majKey || "其他";
+    s = s.replace(/(需求|导航)$/, "").trim();
+    return s || majKey;
+  }
+
   // Group by maj (major category)
   const groups = [];
   const groupMap = {};
@@ -143,12 +151,13 @@
     btn.setAttribute("aria-selected", gi === 0 ? "true" : "false");
     btn.setAttribute("aria-controls", "rt-panel-" + gi);
     btn.id = "rt-tab-" + gi;
-    btn.textContent = key;
-
-    const countBadge = document.createElement("span");
-    countBadge.className = "req-tab-count";
-    countBadge.textContent = rows.length;
-    btn.appendChild(countBadge);
+    const railText = tabRailLabel(key);
+    btn.textContent = railText;
+    btn.title = key;
+    btn.setAttribute(
+      "aria-label",
+      railText + "，共 " + rows.length + " 条课题"
+    );
 
     tabList.appendChild(btn);
 

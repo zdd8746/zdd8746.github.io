@@ -961,6 +961,8 @@ html.ship-brand .req-shell {
   display: flex;
   flex-direction: column;
   gap: 0;
+  /* 切换分类时 scrollIntoView(block:start) 与固定顶栏对齐 */
+  scroll-margin-top: 96px;
 }
 
 /* 横向分类切换：吸顶，避免切分类时再滚回顶部 */
@@ -1070,6 +1072,12 @@ html.ship-brand .req-tab.is-active {
 html.ship-brand .req-tab:focus-visible {
   outline: 2px solid var(--accent-2);
   outline-offset: 2px;
+}
+
+/* 大类名末尾常为「需求」「导航」等，与条数角标紧挨易误读成「需求2」「导航1」 */
+html.ship-brand .req-tab .req-tab-count {
+  margin-left: 8px;
+  flex-shrink: 0;
 }
 
 html.ship-brand .req-stage {
@@ -1511,7 +1519,6 @@ html.ship-brand .plan-cat-head .req-cat-title {
 }
 
 html.ship-brand .plan-tab .req-tab-count {
-  margin-left: 6px;
   padding: 1px 7px;
   border-radius: 999px;
   font-size: 11px;

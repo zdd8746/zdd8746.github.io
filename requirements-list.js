@@ -148,8 +148,20 @@
 
   const panels = Array.from(stage.querySelectorAll(".req-tabpanel"));
 
+  /** 仅在横向 Tab 轨道内居中当前按钮，避免 scrollIntoView 牵动页面纵向滚动 */
+  function centerTabInRail(tabBtn) {
+    if (!scroll || !tabBtn) return;
+    const r = tabBtn.getBoundingClientRect();
+    const sr = scroll.getBoundingClientRect();
+    const pad = r.left - sr.left + scroll.scrollLeft;
+    const target = pad + r.width / 2 - scroll.clientWidth / 2;
+    const maxL = Math.max(0, scroll.scrollWidth - scroll.clientWidth);
+    scroll.scrollTo({ left: Math.max(0, Math.min(target, maxL)), behavior: "smooth" });
+  }
+
   function setActive(i) {
     const n = blocks.length;
+    const prev = active;
     active = ((i % n) + n) % n;
     tabs.forEach((t, j) => {
       const on = j === active;
@@ -161,7 +173,13 @@
       p.hidden = j !== active;
     });
     tabs[active].focus({ preventScroll: true });
-    tabs[active].scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+    centerTabInRail(tabs[active]);
+    // 在长表滚到页面底部后换类，视口仍停在下方，短 panel 会「错位」；拉回需求清单整块区域
+    if (prev !== active) {
+      requestAnimationFrame(() => {
+        shell.scrollIntoView({ block: "start", behavior: "smooth" });
+      });
+    }
   }
 
   scroll.appendChild(tabList);
