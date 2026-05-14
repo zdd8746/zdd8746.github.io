@@ -21,24 +21,37 @@
     return String(s ?? "").trim();
   }
 
-  /** 横向 Tab 文案：去掉大类名末尾的「需求」「导航」，避免与条数角标连读；条数角标已移除。 */
-  function tabRailLabel(majKey) {
-    let s = norm(majKey);
-    if (!s) return majKey || "其他";
-    s = s.replace(/(需求|导航)$/, "").trim();
-    return s || majKey;
-  }
+  /**
+   * 与《0.一张图内容规划（0514）》科研 sheet 列 C「需求落地系统」
+   * 自上而下首次出现的顺序一致（空单元格沿用上一非空值，与 Excel 一致）。
+   */
+  const RESEARCH_SYS_TAB_ORDER = [
+    "科研：自主航行/远程驾控系统",
+    "特性技术研究",
+    "MASS全流程测试验证系统",
+    "智能运维",
+    "智能船舶行业标准与 IMO MASS CODE 体系",
+    "国际规则落地适配",
+    "科研项目协同与成果全生命周期管理",
+  ];
 
-  // Group by maj (major category)
-  const groups = [];
+  // 按列 C 有效值分组（空 sys 继承上一条，与表内合并单元格逻辑一致）
+  let carrySys = "";
   const groupMap = {};
   data.forEach((row) => {
-    const key = norm(row.maj) || "其他";
-    if (!groupMap[key]) {
-      groupMap[key] = [];
-      groups.push(key);
-    }
+    const s = norm(row.sys);
+    if (s) carrySys = s;
+    const key = carrySys || "其他";
+    if (!groupMap[key]) groupMap[key] = [];
     groupMap[key].push(row);
+  });
+
+  const groups = [];
+  RESEARCH_SYS_TAB_ORDER.forEach((k) => {
+    if (groupMap[k] && groupMap[k].length) groups.push(k);
+  });
+  Object.keys(groupMap).forEach((k) => {
+    if (!RESEARCH_SYS_TAB_ORDER.includes(k) && groupMap[k].length) groups.push(k);
   });
 
   root.innerHTML = "";
@@ -47,7 +60,7 @@
   const rail = document.createElement("div");
   rail.className = "req-tab-rail research-tab-rail";
   rail.setAttribute("role", "tablist");
-  rail.setAttribute("aria-label", "科研攻关分类");
+  rail.setAttribute("aria-label", "科研攻关·需求落地系统");
 
   const scrollWrap = document.createElement("div");
   scrollWrap.className = "req-tab-scroll";
@@ -151,13 +164,9 @@
     btn.setAttribute("aria-selected", gi === 0 ? "true" : "false");
     btn.setAttribute("aria-controls", "rt-panel-" + gi);
     btn.id = "rt-tab-" + gi;
-    const railText = tabRailLabel(key);
-    btn.textContent = railText;
+    btn.textContent = key;
     btn.title = key;
-    btn.setAttribute(
-      "aria-label",
-      railText + "，共 " + rows.length + " 条课题"
-    );
+    btn.setAttribute("aria-label", key + "，共 " + rows.length + " 条课题");
 
     tabList.appendChild(btn);
 

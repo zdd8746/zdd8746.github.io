@@ -92,6 +92,41 @@
     return DIM_LABEL[key] || key;
   }
 
+  /** 04 自主航行：第一级 Tab 与《一张图内容规划（0514）》能力线对齐（不按原 maj 分栏） */
+  const AUTONOMY_PILLARS = [
+    "航行环境全域数据采集",
+    "多源感知数据融合与置信度评估",
+    "全局航迹智能规划",
+    "局部动态避碰规划",
+    "航迹精准跟踪与协同控制",
+  ];
+
+  function stripLeadingProblemNum(s) {
+    return norm(s).replace(/^\d+\.\d+\s*/, "").trim();
+  }
+
+  function autonomyPillarForRow(r) {
+    const probTail = stripLeadingProblemNum(r.problem);
+    for (const p of AUTONOMY_PILLARS) {
+      if (probTail === p || probTail.startsWith(p)) return p;
+    }
+    const f = norm(r.func);
+    const fm = f.match(/^(\d+)\.(\d+)\.\d+/);
+    if (fm) {
+      const a = fm[1];
+      const b = fm[2];
+      if (a === "1" && b === "1") return AUTONOMY_PILLARS[0];
+      if (a === "1" && b === "2") return AUTONOMY_PILLARS[1];
+      if (a === "2" && b === "1") return AUTONOMY_PILLARS[2];
+      if (a === "2" && b === "2") return AUTONOMY_PILLARS[3];
+      if (a === "2" && b === "3") return AUTONOMY_PILLARS[4];
+    }
+    const req = norm(r.req);
+    if (!f && /多源|融合|孪生|协同处理/.test(req)) return AUTONOMY_PILLARS[1];
+    if (!f && !probTail && /海图|数据库|S-100|IHO/.test(req)) return AUTONOMY_PILLARS[0];
+    return AUTONOMY_PILLARS[0];
+  }
+
   document.querySelectorAll("[data-module-detail]").forEach((root) => {
     const key = root.getAttribute("data-module-detail");
     const rows = data[key];
@@ -100,20 +135,36 @@
       return;
     }
 
-    const byMaj = new Map();
-    rows.forEach((r) => {
-      const m = norm(r.maj) || "其他";
-      if (!byMaj.has(m)) byMaj.set(m, []);
-      byMaj.get(m).push(r);
-    });
-
-    const majBlocks = Array.from(byMaj.entries()).map(([name, list]) => {
-      const dims = {};
-      CATEGORIES.forEach(([fieldKey]) => {
-        dims[fieldKey] = aggregateField(list, fieldKey);
+    let majBlocks;
+    if (key === "autonomy") {
+      const buckets = new Map(AUTONOMY_PILLARS.map((p) => [p, []]));
+      rows.forEach((r) => {
+        const pillar = autonomyPillarForRow(r);
+        buckets.get(pillar).push(r);
       });
-      return { name, list, dims };
-    });
+      majBlocks = AUTONOMY_PILLARS.map((name) => {
+        const list = buckets.get(name) || [];
+        const dims = {};
+        CATEGORIES.forEach(([fieldKey]) => {
+          dims[fieldKey] = aggregateField(list, fieldKey);
+        });
+        return { name, list, dims };
+      }).filter((b) => b.list.length > 0);
+    } else {
+      const byMaj = new Map();
+      rows.forEach((r) => {
+        const m = norm(r.maj) || "其他";
+        if (!byMaj.has(m)) byMaj.set(m, []);
+        byMaj.get(m).push(r);
+      });
+      majBlocks = Array.from(byMaj.entries()).map(([name, list]) => {
+        const dims = {};
+        CATEGORIES.forEach(([fieldKey]) => {
+          dims[fieldKey] = aggregateField(list, fieldKey);
+        });
+        return { name, list, dims };
+      });
+    }
 
     function firstNonEmptyDimKey(dims) {
       for (const [fieldKey] of CATEGORIES) {
@@ -131,7 +182,10 @@
     const railMaj = document.createElement("div");
     railMaj.className = "md-rail md-rail-maj";
     railMaj.setAttribute("role", "tablist");
-    railMaj.setAttribute("aria-label", "需求大类");
+    railMaj.setAttribute(
+      "aria-label",
+      key === "autonomy" ? "自主航行能力分层（内容规划 0514）" : "需求大类"
+    );
 
     const railDim = document.createElement("div");
     railDim.className = "md-rail md-rail-dim";
