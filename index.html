@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="zh-CN" class="ship-brand">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>船舶一张图 · 智能船舶业务导读</title>
+  <meta name="description" content="船舶一张图：智能船舶业务能力导读。交通强国、海洋强国、制造强国与绿色航运背景下，政策、系统、路径与协同要点聚合。">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("ship-one-map-theme") !== "dark") {
+          document.documentElement.setAttribute("data-theme", "light");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./ship-theme.css">
+</head>
+<body>
+  <header class="site-header" id="top">
+    <nav class="nav">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 15.5c2.3-2.5 4.7-2.5 7 0s4.7 2.5 7 0 4.7-2.5 7 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M2 11.5c2.3-2.5 4.7-2.5 7 0s4.7 2.5 7 0 4.7-2.5 7 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity="0.82"/>
+            <path d="M2 7.5c2.3-2.5 4.7-2.5 7 0s4.7 2.5 7 0 4.7-2.5 7 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" opacity="0.64"/>
+          </svg>
+        </span>
+        <span>
+          <strong>船舶一张图</strong>
+          <small>Intelligent Ship · One Map</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false">菜单</button>
+      <div class="nav-links">
+        <a href="#overview"><strong><span class="nav-index">01</span>规划概览</strong><small>整体结构</small></a>
+        <a href="#requirement-catalog"><strong><span class="nav-index">02</span>需求清单</strong></a>
+        <a href="#systems"><strong><span class="nav-index">03</span>落地系统</strong><small>七大系统</small></a>
+        <a href="#autonomy"><strong><span class="nav-index">04</span>自主航行</strong><small>感知与决策</small></a>
+        <a href="#energy"><strong><span class="nav-index">05</span>智能能效</strong><small>优化与履约</small></a>
+        <a href="#hull"><strong><span class="nav-index">06</span>智能船体</strong><small>监测与仿真</small></a>
+        <a href="#machinery"><strong><span class="nav-index">07</span>智能机舱</strong><small>状态与远程运维</small></a>
+        <a href="#platform"><strong><span class="nav-index">08</span>船端集成平台</strong><small>数据与边缘计算</small></a>
+        <a href="#shore-control"><strong><span class="nav-index">09</span>岸基管控与服务</strong><small>监管与应急指挥</small></a>
+        <a href="#governance"><strong><span class="nav-index">10</span>岸基保障与监督</strong><small>审计与 SLA</small></a>
+        <a href="#lifecycle"><strong><span class="nav-index">11</span>全生命周期</strong><small>建造营运</small></a>
+        <a href="#research"><strong><span class="nav-index">12</span>科研攻关</strong><small>平台与验证</small></a>
+      </div>
+    </nav>
+  </header>
+
+  <button type="button" class="theme-toggle" id="theme-toggle" aria-label="切换为白天模式" title="白天 / 黑夜">
+    <span class="theme-toggle-track" aria-hidden="true">
+      <span class="theme-toggle-thumb"></span>
+    </span>
+    <span class="theme-toggle-label">白天</span>
+  </button>
+
+  <main>
+    <section class="hero section ship-hero" aria-labelledby="ship-hero-title">
+      <div class="ship-hero-inner">
+        <div class="hero-content ship-hero-main">
+          <p class="ship-hero-kicker">智能船舶业务能力导读</p>
+          <h1 class="hero-title" id="ship-hero-title">
+            <span class="hero-title-line">船舶一张图</span>
+            <span class="gradient-text">系统落地与能力路径</span>
+          </h1>
+          <p class="hero-lead ship-hero-lead">
+            本导读在国家<strong>交通强国、海洋强国、制造强国</strong>的战略框架下，承接<strong>绿色低碳航运、船舶智能制造与海事数字化</strong>等现实趋势，将<strong>政策与合规要求</strong>、<strong>市场与营运一线关切</strong>，系统映射为可评审、可拆解的<strong>系统边界与建设路径</strong>；并同步交代<strong>能力底座、差距短板与集团内外资源协同</strong>，形成<strong>连贯、可追溯</strong>的能力说明，支撑汇报交流与方案闭环研讨。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#overview">进入规划概览</a>
+            <a class="button ghost" href="#systems">七大落地系统</a>
+            <a class="button ghost" href="#research">科研与验证</a>
+          </div>
+        </div>
+        <aside class="hero-panel ship-hero-side" aria-label="七大落地系统拓扑图示" aria-hidden="true">
+          <div class="hero-viz">
+            <svg class="viz-svg" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img">
+              <defs>
+                <pattern id="vdots" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <circle cx="2" cy="2" r="0.9" fill="#4eb0ea" opacity="0.2"/>
+                </pattern>
+                <radialGradient id="vhub-g" cx="40%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="#7cc4f0"/>
+                  <stop offset="100%" stop-color="#0f6db5"/>
+                </radialGradient>
+                <radialGradient id="vnode-g" cx="40%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="#5cbce8"/>
+                  <stop offset="100%" stop-color="#1268a6"/>
+                </radialGradient>
+                <radialGradient id="vshore-g" cx="40%" cy="35%" r="70%">
+                  <stop offset="0%" stop-color="#8bdaa0"/>
+                  <stop offset="100%" stop-color="#1a7a45"/>
+                </radialGradient>
+                <filter id="vg-hub">
+                  <feGaussianBlur stdDeviation="7" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="vg-node">
+                  <feGaussianBlur stdDeviation="3.5" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="vg-line">
+                  <feGaussianBlur stdDeviation="1.5" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+
+              <!-- dot background -->
+              <rect width="320" height="380" fill="url(#vdots)" rx="14"/>
+
+              <!-- rings -->
+              <circle cx="160" cy="190" r="148" stroke="#4eb0ea" stroke-width="0.6" stroke-opacity="0.1" fill="none"/>
+              <circle cx="160" cy="190" r="118" stroke="#4eb0ea" stroke-width="0.7" stroke-opacity="0.18" fill="none" stroke-dasharray="5 10">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 160 190" to="360 160 190" dur="72s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="160" cy="190" r="68" stroke="#4eb0ea" stroke-width="0.6" stroke-opacity="0.2" fill="none" stroke-dasharray="2 7">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="360 160 190" to="0 160 190" dur="48s" repeatCount="indefinite"/>
+              </circle>
+
+              <!-- scan pulse 1 -->
+              <circle cx="160" cy="190" r="10" stroke="#4eb0ea" stroke-width="1.5" fill="none">
+                <animate attributeName="r" values="10;148" dur="3.2s" repeatCount="indefinite" begin="0.8s"/>
+                <animate attributeName="stroke-opacity" values="0.55;0" dur="3.2s" repeatCount="indefinite" begin="0.8s"/>
+              </circle>
+              <!-- scan pulse 2 -->
+              <circle cx="160" cy="190" r="10" stroke="#7cc4f0" stroke-width="1" fill="none">
+                <animate attributeName="r" values="10;148" dur="3.2s" repeatCount="indefinite" begin="2.4s"/>
+                <animate attributeName="stroke-opacity" values="0.35;0" dur="3.2s" repeatCount="indefinite" begin="2.4s"/>
+              </circle>
+
+              <!-- connection lines: hub(160,190) → 7 nodes -->
+              <!-- node positions (r=118 from center): equally spaced 51.4° from top (-90°) -->
+              <!-- n0(160,72) n1(252,116) n2(274,214) n3(212,292) n4(108,292) n5(46,214) n6(68,116) -->
+              <g filter="url(#vg-line)">
+                <line x1="160" y1="190" x2="160" y2="72" stroke="#4eb0ea" stroke-width="1.3" stroke-opacity="0.55" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-120;0" dur="5.5s" repeatCount="indefinite"/>
+                </line>
+                <line x1="160" y1="190" x2="252" y2="116" stroke="#4eb0ea" stroke-width="1.3" stroke-opacity="0.55" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-118;0" dur="5.8s" repeatCount="indefinite" begin="0.4s"/>
+                </line>
+                <line x1="160" y1="190" x2="274" y2="214" stroke="#4eb0ea" stroke-width="1.3" stroke-opacity="0.55" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-115;0" dur="6.2s" repeatCount="indefinite" begin="0.8s"/>
+                </line>
+                <line x1="160" y1="190" x2="212" y2="292" stroke="#4eb0ea" stroke-width="1.3" stroke-opacity="0.55" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-120;0" dur="5.4s" repeatCount="indefinite" begin="0.2s"/>
+                </line>
+                <line x1="160" y1="190" x2="108" y2="292" stroke="#4eb0ea" stroke-width="1.3" stroke-opacity="0.55" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-120;0" dur="6s" repeatCount="indefinite" begin="1.1s"/>
+                </line>
+                <line x1="160" y1="190" x2="46" y2="214" stroke="#8bdaa0" stroke-width="1.3" stroke-opacity="0.5" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-115;0" dur="5.6s" repeatCount="indefinite" begin="0.6s"/>
+                </line>
+                <line x1="160" y1="190" x2="68" y2="116" stroke="#8bdaa0" stroke-width="1.3" stroke-opacity="0.5" stroke-dasharray="8 12">
+                  <animate attributeName="stroke-dashoffset" values="0;-118;0" dur="5.9s" repeatCount="indefinite" begin="1.4s"/>
+                </line>
+              </g>
+
+              <!-- outer arc between adjacent nodes -->
+              <g stroke="#7cc4f0" stroke-width="0.6" stroke-opacity="0.22" fill="none">
+                <path d="M160,72 Q215,72 252,116"/>
+                <path d="M252,116 Q285,158 274,214"/>
+                <path d="M274,214 Q262,268 212,292"/>
+                <path d="M212,292 Q160,318 108,292"/>
+                <path d="M108,292 Q58,266 46,214"/>
+                <path d="M46,214 Q38,158 68,116"/>
+                <path d="M68,116 Q105,72 160,72"/>
+              </g>
+
+              <!-- data flow dots along spokes -->
+              <circle r="2.8" fill="#7cc4f0" opacity="0">
+                <animate attributeName="opacity" values="0;0.95;0.95;0" dur="2.2s" repeatCount="indefinite" begin="0.5s"/>
+                <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.5s" path="M160,190 L160,72"/>
+              </circle>
+              <circle r="2.5" fill="#ffffff" opacity="0">
+                <animate attributeName="opacity" values="0;0.85;0.85;0" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+                <animateMotion dur="2.4s" repeatCount="indefinite" begin="1.2s" path="M160,190 L252,116"/>
+              </circle>
+              <circle r="2.8" fill="#7cc4f0" opacity="0">
+                <animate attributeName="opacity" values="0;0.9;0.9;0" dur="2.5s" repeatCount="indefinite" begin="2.4s"/>
+                <animateMotion dur="2.5s" repeatCount="indefinite" begin="2.4s" path="M160,190 L274,214"/>
+              </circle>
+              <circle r="2.8" fill="#8bdaa0" opacity="0">
+                <animate attributeName="opacity" values="0;0.85;0.85;0" dur="2.3s" repeatCount="indefinite" begin="3.6s"/>
+                <animateMotion dur="2.3s" repeatCount="indefinite" begin="3.6s" path="M160,190 L46,214"/>
+              </circle>
+              <circle r="2.5" fill="#8bdaa0" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.6s" repeatCount="indefinite" begin="4.8s"/>
+                <animateMotion dur="2.6s" repeatCount="indefinite" begin="4.8s" path="M160,190 L68,116"/>
+              </circle>
+
+              <!-- 7 system nodes -->
+              <g filter="url(#vg-node)">
+                <!-- S01 Autonomy (top) -->
+                <circle cx="160" cy="72" r="19" fill="url(#vnode-g)" fill-opacity="0.9" stroke="#7cc4f0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.9;0.6;0.9" dur="4.2s" repeatCount="indefinite" begin="0.3s"/>
+                </circle>
+                <text x="160" y="70" text-anchor="middle" font-size="8.5" fill="#d0eeff" font-weight="800" font-family="monospace" opacity="0.9">S01</text>
+                <text x="160" y="80" text-anchor="middle" font-size="6.5" fill="#a0d0f0" font-family="sans-serif" opacity="0.75">自主航行</text>
+
+                <!-- S02 Energy (upper-right) -->
+                <circle cx="252" cy="116" r="18" fill="url(#vnode-g)" fill-opacity="0.85" stroke="#7cc4f0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.85;0.55;0.85" dur="4.8s" repeatCount="indefinite" begin="0.8s"/>
+                </circle>
+                <text x="252" y="114" text-anchor="middle" font-size="8.5" fill="#d0eeff" font-weight="800" font-family="monospace" opacity="0.9">S02</text>
+                <text x="252" y="124" text-anchor="middle" font-size="6.5" fill="#a0d0f0" font-family="sans-serif" opacity="0.75">智能能效</text>
+
+                <!-- S03 Hull (right) -->
+                <circle cx="274" cy="214" r="18" fill="url(#vnode-g)" fill-opacity="0.85" stroke="#7cc4f0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.85;0.55;0.85" dur="3.9s" repeatCount="indefinite" begin="1.4s"/>
+                </circle>
+                <text x="274" y="212" text-anchor="middle" font-size="8.5" fill="#d0eeff" font-weight="800" font-family="monospace" opacity="0.9">S03</text>
+                <text x="274" y="222" text-anchor="middle" font-size="6.5" fill="#a0d0f0" font-family="sans-serif" opacity="0.75">智能船体</text>
+
+                <!-- S04 Machinery (lower-right) -->
+                <circle cx="212" cy="292" r="18" fill="url(#vnode-g)" fill-opacity="0.85" stroke="#7cc4f0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.85;0.55;0.85" dur="4.4s" repeatCount="indefinite" begin="0.6s"/>
+                </circle>
+                <text x="212" y="290" text-anchor="middle" font-size="8.5" fill="#d0eeff" font-weight="800" font-family="monospace" opacity="0.9">S04</text>
+                <text x="212" y="300" text-anchor="middle" font-size="6.5" fill="#a0d0f0" font-family="sans-serif" opacity="0.75">智能机舱</text>
+
+                <!-- S05 Platform (lower-left) -->
+                <circle cx="108" cy="292" r="18" fill="url(#vnode-g)" fill-opacity="0.85" stroke="#7cc4f0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.85;0.55;0.85" dur="5.1s" repeatCount="indefinite" begin="1.1s"/>
+                </circle>
+                <text x="108" y="290" text-anchor="middle" font-size="8.5" fill="#d0eeff" font-weight="800" font-family="monospace" opacity="0.9">S05</text>
+                <text x="108" y="300" text-anchor="middle" font-size="6.5" fill="#a0d0f0" font-family="sans-serif" opacity="0.75">集成平台</text>
+
+                <!-- S06 Shore Control (left) — green tint = shore -->
+                <circle cx="46" cy="214" r="18" fill="url(#vshore-g)" fill-opacity="0.8" stroke="#8bdaa0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.8;0.5;0.8" dur="3.6s" repeatCount="indefinite" begin="1.7s"/>
+                </circle>
+                <text x="46" y="212" text-anchor="middle" font-size="8.5" fill="#d0ffea" font-weight="800" font-family="monospace" opacity="0.9">S06</text>
+                <text x="46" y="222" text-anchor="middle" font-size="6.5" fill="#90d8b0" font-family="sans-serif" opacity="0.75">岸基管控</text>
+
+                <!-- S07 Shore Support (upper-left) — green tint -->
+                <circle cx="68" cy="116" r="18" fill="url(#vshore-g)" fill-opacity="0.8" stroke="#8bdaa0" stroke-width="1.4">
+                  <animate attributeName="fill-opacity" values="0.8;0.5;0.8" dur="4.6s" repeatCount="indefinite" begin="2.2s"/>
+                </circle>
+                <text x="68" y="114" text-anchor="middle" font-size="8.5" fill="#d0ffea" font-weight="800" font-family="monospace" opacity="0.9">S07</text>
+                <text x="68" y="124" text-anchor="middle" font-size="6.5" fill="#90d8b0" font-family="sans-serif" opacity="0.75">岸基保障</text>
+              </g>
+
+              <!-- central hub -->
+              <circle cx="160" cy="190" r="44" fill="#0f6db5" fill-opacity="0.1" stroke="#4eb0ea" stroke-width="0.8" stroke-opacity="0.3"/>
+              <circle cx="160" cy="190" r="35" fill="url(#vhub-g)" fill-opacity="0.88" stroke="#7cc4f0" stroke-width="2" stroke-opacity="0.9" filter="url(#vg-hub)">
+                <animate attributeName="fill-opacity" values="0.88;0.7;0.88" dur="3s" repeatCount="indefinite"/>
+              </circle>
+              <!-- ship wave icon in hub -->
+              <g opacity="0.9">
+                <path d="M145,188 Q150,183 155,188 Q160,193 165,188 Q170,183 175,188" stroke="#d0eeff" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                <path d="M145,183 Q150,178 155,183 Q160,188 165,183 Q170,178 175,183" stroke="#d0eeff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.65"/>
+                <path d="M145,193 Q150,198 155,193 Q160,188 165,193 Q170,198 175,193" stroke="#d0eeff" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.45"/>
+              </g>
+
+              <!-- legend: ship vs shore -->
+              <circle cx="38" cy="350" r="5" fill="url(#vnode-g)" fill-opacity="0.85"/>
+              <text x="47" y="354" font-size="8" fill="#a0c8e8" font-family="sans-serif" opacity="0.75">船端系统</text>
+              <circle cx="110" cy="350" r="5" fill="url(#vshore-g)" fill-opacity="0.85"/>
+              <text x="119" y="354" font-size="8" fill="#90d8b0" font-family="sans-serif" opacity="0.75">岸基系统</text>
+            </svg>
+
+            <!-- corner frame decorations -->
+            <span class="viz-corner viz-corner--tl" aria-hidden="true"></span>
+            <span class="viz-corner viz-corner--tr" aria-hidden="true"></span>
+            <span class="viz-corner viz-corner--bl" aria-hidden="true"></span>
+            <span class="viz-corner viz-corner--br" aria-hidden="true"></span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="section-heading wide">
+        <p class="eyebrow">01 / Planning Schema</p>
+        <h2>规划概览</h2>
+        <p class="overview-lead">
+          本章概述政策与行业趋势，并以四维结构说明<strong>船舶一张图</strong>：<strong>需求侧、解决方案、现状与基础、差距与协同</strong>。
+        </p>
+      </div>
+
+      <div class="overview-policy">
+        <h3 class="overview-subtitle">国家政策与行业趋势</h3>
+        <p>
+          <strong>国家战略层面</strong>，《交通强国建设纲要》等文件明确智慧交通、绿色低碳与安全可控的发展方向；海洋强国与造船强国建设推动船舶工业向高端化、智能化、绿色化升级。「双碳」目标与海事业<strong>绿色低碳与能效履约</strong>（如 CII、区域/燃料规则）叠加，使「可计量、可报告、可核查」的能效与排放管理成为刚性约束。
+        </p>
+        <p>
+          <strong>行业与海事趋势（公开信息归纳）</strong>：IMO 持续推进海上自主水面船舶（MASS）试验、远程操控与船员配员相关安全框架；绿色航运侧 <strong>FuelEU Maritime、CII 与区域/燃料规则</strong> 推动船队可计量、可报告、可核查履约。欧盟与主要港口推动<strong>岸电、数字化靠泊与港口数据协同</strong>。国内<strong>海事监管数字化、智能航运先导区与示范船工程</strong>并行；中国船级社等对<strong>网络安全、软件与数据关键等级（Cyber）</strong>的审图与验证要求趋严。产业侧呈现<strong>船端智能 + 岸基一体 + 数据与安全横切</strong>的整体建设态势。
+        </p>
+      </div>
+
+      <div class="overview-map">
+        <h3 class="overview-subtitle">船舶一张图在讲什么</h3>
+        <p>
+          将复杂议题压缩为一条主线：先从业务语言厘清<strong>调研点与待解决问题</strong>，再映射到可识别的<strong>系统与功能边界</strong>，进而展开<strong>技术路径、关键设备与验证体系</strong>，并说明<strong>现有资源与能力基础、人员与组织缺口、集团内外协同</strong>——避免「只讲方案、不讲家底」，也避免「只列功能、不回应问题」。
+        </p>
+      </div>
+
+      <div class="overview-cross">
+        <h3 class="overview-subtitle">各专题与四维结构</h3>
+        <p>
+          <strong>需求清单</strong>写调研点与问题；<strong>落地系统</strong>写能力与边界；<strong>自主航行、智能能效、智能船体、智能机舱、船端集成平台、岸基管控与服务、岸基保障与监督、全生命周期</strong>等章节分域写方案路径、设备与技术要点，并说明现状与差距；<strong>科研攻关</strong>写试验验证、标准规则与成果治理。工程类条目不单独成表，按模块展开。
+        </p>
+      </div>
+
+      <div class="overview-sym-grid" role="presentation">
+        <article class="overview-tile">
+          <span class="overview-tile-label">需求侧</span>
+          <h3>问题与约束</h3>
+          <p>以调研点、营运与监管场景的<strong>真实问题陈述</strong>为锚点，区分「要达成什么」与「不能突破什么」（安全、合规、成本与组织边界）。详见各章需求条目与专题导语。</p>
+        </article>
+        <article class="overview-tile">
+          <span class="overview-tile-label">解决方案</span>
+          <h3>系统与路径</h3>
+          <p>将需求落到<strong>落地系统、功能分解、关键技术、设备选型与工程化路径</strong>，形成可评审、可拆工作包、可跟踪交付的表述。</p>
+        </article>
+        <article class="overview-tile">
+          <span class="overview-tile-label">现状</span>
+          <h3>基础与资源</h3>
+          <p>交代已有建设、内外部资源与可复用资产（含产学研、供应链与试验条件），明确「可依托什么起跑」。</p>
+        </article>
+        <article class="overview-tile">
+          <span class="overview-tile-label">差距</span>
+          <h3>能力与协同</h3>
+          <p>对照目标拆解<strong>能力不足、人员与组织缺口</strong>，明确<strong>集团协同与生态补位</strong>期望，形成可执行的弥补路径，避免笼统判断。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="requirement-catalog">
+      <div class="section-heading wide">
+        <p class="eyebrow">02 / Requirement Catalog</p>
+        <h2>智能船舶需求清单</h2>
+        <p>
+          按业务分类列出需求说明原文，突出调研点与待解决问题。每一类单独成表。
+        </p>
+      </div>
+      <div id="requirement-catalog-root" class="req-catalog"></div>
+    </section>
+
+    <section class="section dark-section" id="systems">
+      <div class="section-heading wide">
+        <p class="eyebrow">03 / Target Systems</p>
+        <h2>七大需求落地系统</h2>
+        <p>船端五大系统与岸基两大平台；点击卡片直达对应章节。</p>
+      </div>
+      <div class="industry-groups">
+        <div class="industry-group">
+          <div class="industry-group-title">
+            <span>Ship-Side · S01–S05</span>
+            <h4>船端五大系统</h4>
+          </div>
+          <div class="industry-grid">
+            <a class="industry-card-link" href="#autonomy"><article><span>S01</span><h4>自主航行</h4><p><b>常见关切：</b>提升态势感知与小目标探测能力，恶劣天气下稳定探测；多源融合与置信度评估。</p><p><b>能力要点：</b>全域感知、航迹规划、COLREGs 合规避碰、受限水域规划、协同控制与冗余。</p></article></a>
+            <a class="industry-card-link" href="#energy"><article><span>S02</span><h4>智能能效</h4><p><b>常见关切：</b>油耗/排放可视化、降低报表负担；性能评估、航速优化、双燃料与混动策略、CII/FuelEU 等履约。</p><p><b>能力要点：</b>ISO15016/19030、孪生推演、法规一体化报表。</p></article></a>
+            <a class="industry-card-link" href="#hull"><article><span>S03</span><h4>智能船体</h4><p><b>常见关切：</b>应力/运动监测支撑轻量化与资产运维；监测预警与结构辅助决策。</p><p><b>能力要点：</b>FEA 对标、疲劳寿命、与装载/航行系统联动。</p></article></a>
+            <a class="industry-card-link" href="#machinery"><article><span>S04</span><h4>智能机舱</h4><p><b>常见关切：</b>岸基远程掌握设备状态、故障预警与诊断报告，缩短专家上船路径。</p><p><b>能力要点：</b>状态监测、预测性维护、船岸一致的数据口径。</p></article></a>
+            <a class="industry-card-link" href="#platform"><article><span>S05</span><h4>船端集成平台</h4><p><b>常见关切：</b>建设船端数据池/数据中台，汇聚感知、航行、机舱多源异构时空数据，支撑分析与上层应用。</p><p><b>能力要点：</b>统一数据接入、边缘计算、船端应用框架与安全隔离。</p></article></a>
+          </div>
+        </div>
+        <div class="industry-group">
+          <div class="industry-group-title">
+            <span>Shore-Side · S06–S07</span>
+            <h4>岸基两大平台</h4>
+          </div>
+          <div class="industry-grid systems-shore-grid">
+            <a class="industry-card-link" href="#shore-control"><article><span>S06</span><h4>岸基管控与服务</h4><p><b>常见关切：</b>船岸通信稳定与成本可控，7×24 监管与应急指挥达到不低于人工在船的管理水平。</p><p><b>能力要点：</b>多链路船岸通信、远程监控视图、应急指挥与故障联动处置。</p></article></a>
+            <a class="industry-card-link" href="#governance"><article><span>S07</span><h4>岸基保障与监督</h4><p><b>常见关切：</b>保障与监督侧重合规审计、SLA 管理与备件/人员调度，与 S06 共享通信底座，分拆运维与审计职责。</p><p><b>能力要点：</b>运维 SLA 监督、审计追溯、备件调度与人员协同。</p></article></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="autonomy">
+      <div class="section-heading wide">
+        <p class="eyebrow">04 / Autonomy Stack</p>
+        <h2>自主航行：从感知到控制</h2>
+        <p>围绕「船舶航行安全决策」与「国产化通信导航」等方向，可将能力拆为环境采集、融合预测、规划避碰与执行控制四层。下列为各层关键能力摘要。</p>
+      </div>
+      <div class="industry-panel">
+        <h3>全域感知与数据基础</h3>
+        <p>气象导航、航海雷达、激光/毫米波雷达、光电、AIS、电子海图等多源冗余架构；时空配准与融合；极端气象下小目标与抗干扰；IHO S-100 体系与海图生产协同；航行系统设备状态自感知与智能机舱联动。</p>
+        <div class="industry-rank module-summary-2x2">
+          <article>
+            <strong>融合与可信</strong>
+            <span>异构传感器时空配准、目标属性分类与轨迹预测、感知失效冗余切换与告警；与试验验证、船级社审核口径衔接。</span>
+          </article>
+          <article>
+            <strong>规划与合规</strong>
+            <span>全局最经济航线与气象水文约束；COLREGs 全局校验与复杂水域避碰；禁航/管制/渔区规避；突发非合作目标应急策略；虚实结合仿真与用例库。</span>
+          </article>
+          <article>
+            <strong>控制与执行</strong>
+            <span>高精度航迹保持、风浪流补偿、主机-舵机-侧推协同；国产化通用控制器、冗余容错与产业链可控（传感器/控制器合作或控股布局）。</span>
+          </article>
+        </div>
+      </div>
+      <div class="module-detail-root" data-module-detail="autonomy"></div>
+    </section>
+
+    <section class="section dark-section" id="energy">
+      <div class="section-heading wide">
+        <p class="eyebrow">05 / Energy Intelligence</p>
+        <h2>智能能效：从监测到履约闭环</h2>
+        <p>在能效领域，监管与客户侧普遍关注<strong>可量化、可展示的节能与履约成效</strong>。功能线覆盖性能评估、航速与纵倾优化、双燃料/混动、孪生推演及多法规履约。</p>
+      </div>
+      <div class="business-grid module-summary-2x2">
+        <article>
+          <span>能效 01</span>
+          <h3>性能与污损</h3>
+          <p>基于改进 ISO15016 的航速功率评估、环境筛选与标准化修正、与模型试验曲线对标；ISO19030-2 航速损失与污底识别。</p>
+        </article>
+        <article>
+          <span>能效 02</span>
+          <h3>航速与多能源优化</h3>
+          <p>航速-功率-油耗建模与多目标优化；双燃料模式与混动功率分配；与自主航行安全目标的协同优化边界。</p>
+        </article>
+        <article>
+          <span>能效 03</span>
+          <h3>孪生与电推</h3>
+          <p>常见海况航行性能孪生、船队营运孪生、数据融合迭代；电推推进效率与单位里程能耗趋势分析。</p>
+        </article>
+        <article>
+          <span>能效 04</span>
+          <h3>CII / FuelEU / EU-ETS</h3>
+          <p>多法规一体化核算与航次级 CII 预报、合规风险预警、监管报表自动生成与改进闭环。</p>
+        </article>
+      </div>
+      <div class="module-detail-root" data-module-detail="energy"></div>
+    </section>
+
+    <section class="section" id="hull">
+      <div class="section-heading wide">
+        <p class="eyebrow">06 / Digital Hull</p>
+        <h2>智能船体：监测、仿真与决策缺口</h2>
+        <p>当前建设重心多在监测侧；要进一步发挥价值，需在数据标定、结构仿真能力、自研装载计算机以及与航行/装载系统的数据打通上持续投入。辅助决策应尽量输出可执行、可量化的操作建议。</p>
+      </div>
+      <div class="industry-panel">
+        <h3>典型监测对象</h3>
+        <p>总纵/局部应力、六自由度运动、砰击与振动、弯矩（营运中弯矩有时比单点应力更直观）、疲劳损伤与剩余寿命、板厚腐蚀预测等。</p>
+        <div class="industry-rank module-summary-2x2">
+          <article>
+            <strong>短期预测</strong>
+            <span>基于 AI 的应力短期预测，融合运动与环境数据训练。</span>
+          </article>
+          <article>
+            <strong>长期与资产</strong>
+            <span>长期统计与寿命预测；维修计划与全生命周期资产管理接口。</span>
+          </article>
+          <article>
+            <strong>协同</strong>
+            <span>与重工设计院、船厂协同；与智能货物管控、装载计算机、航行系统共享模型与载荷数据。</span>
+          </article>
+        </div>
+      </div>
+      <div class="module-detail-root" data-module-detail="hull"></div>
+    </section>
+
+    <section class="section dark-section" id="machinery">
+      <div class="section-heading wide">
+        <p class="eyebrow">07 / Intelligent Machinery</p>
+        <h2>智能机舱：状态监测与远程运维</h2>
+        <p>机舱监测、故障诊断与远程运维通常与「智能运维」改造一体规划；新造船侧重系统集成与交付一致性，营运船则关注非侵入式监测与剩余寿命预测等可渐进落地的能力。</p>
+      </div>
+      <div class="business-grid module-summary-2x2">
+        <article>
+          <span>运维 01</span>
+          <h3>船岸一致的诊断视图</h3>
+          <p>状态数据、预警与诊断报告上云/上岸基，支撑 24h 技术支持决策。</p>
+        </article>
+        <article>
+          <span>运维 02</span>
+          <h3>预测与改造</h3>
+          <p>剩余寿命预测、非侵入式状态监测，面向老旧船改造与新造船一体化交付。</p>
+        </article>
+        <article>
+          <span>运维 03</span>
+          <h3>EMS 攻关（科研）</h3>
+          <p>全船能效综合优化与航速-纵倾协同等系统级技术包。</p>
+        </article>
+        <article>
+          <span>运维 04</span>
+          <h3>组织缺口提示</h3>
+          <p>能力建设上，仿真、结构、算法与软件开发等岗位容易出现缺口，需与招聘、高校与联合实验室等安排同步推进。</p>
+        </article>
+      </div>
+      <div class="module-detail-root" data-module-detail="machinery"></div>
+    </section>
+
+    <section class="section" id="platform">
+      <div class="section-heading wide">
+        <p class="eyebrow">08 / Ship Integrated Platform</p>
+        <h2>船端集成平台：数据接入与中台能力</h2>
+        <p>船端数据池、统一接入、边缘计算与安全隔离，为多业务应用提供一致数据口径。</p>
+      </div>
+      <div class="business-grid module-summary-2x2">
+        <article>
+          <span>集成 01</span>
+          <h3>数据池与治理</h3>
+          <p>多源异构时空数据汇聚、清洗、标注与存储；主数据与质量口径统一，支撑上层分析与船岸一致视图。</p>
+        </article>
+        <article>
+          <span>集成 02</span>
+          <h3>船岸链路与终端</h3>
+          <p>多链路通信、成本可控与链路切换；船载终端与边缘计算，保障弱网与高抖动场景下的业务连续性。</p>
+        </article>
+      </div>
+      <div class="module-detail-root" data-module-detail="platform"></div>
+    </section>
+
+    <section class="section dark-section" id="shore-control">
+      <div class="section-heading wide">
+        <p class="eyebrow">09 / Shore Control &amp; Service</p>
+        <h2>岸基管控与服务：通信、监管与应急</h2>
+        <p>多链路船岸通信、远程监控与应急指挥、故障联动处置；与船端集成平台数据底座协同、职责分拆。</p>
+      </div>
+      <div class="business-grid module-summary-2x2">
+        <article>
+          <span>管控 01</span>
+          <h3>远程监管与应急</h3>
+          <p>7×24 监控视图、应急指挥与故障联动处置；与管控流程 KPI 对齐，缩短岸基决策闭环。</p>
+        </article>
+        <article>
+          <span>管控 02</span>
+          <h3>架构与安全衔接</h3>
+          <p>与远程驾控、网络安全与数据治理章节统一架构；应用框架、隔离域与审计接口预留。</p>
+        </article>
+      </div>
+      <div class="module-detail-root" data-module-detail="shore_control"></div>
+    </section>
+
+    <section class="section dark-section" id="governance">
+      <div class="section-heading wide">
+        <p class="eyebrow">10 / Shore Supervision</p>
+        <h2>岸基保障与监督：审计、SLA 与资源协同</h2>
+        <p>合规审计、运维 SLA、备件与人员调度；与岸基管控共享通信底座，分拆运维与审计职责。</p>
+      </div>
+      <div class="business-grid module-summary-2x2">
+        <article>
+          <span>横切 01</span>
+          <h3>数据治理</h3>
+          <p>主数据、质量、分级分类与交换标准，支撑机海务、经营调度及不同船型特性数据集。</p>
+        </article>
+        <article>
+          <span>横切 02</span>
+          <h3>网络安全</h3>
+          <p>船岸链路与船载终端的安全态势感知与联动处置能力。</p>
+        </article>
+        <article>
+          <span>横切 03</span>
+          <h3>硬件与基础设施</h3>
+          <p>国产化采集、边缘计算、服务器与存储等底座清单与认证要求。</p>
+        </article>
+        <article>
+          <span>横切 04</span>
+          <h3>业务数据应用</h3>
+          <p>面向机海务、经营调度的安全管理数据应用及船型差异化需求。</p>
+        </article>
+      </div>
+      <div class="module-detail-root" data-module-detail="governance"></div>
+    </section>
+
+    <section class="section" id="lifecycle">
+      <div class="section-heading wide">
+        <p class="eyebrow">11 / Lifecycle</p>
+        <h2>全生命周期：验证、适配与人才</h2>
+        <p>试验验证与认证、船员培训数字化、新造船与营运船差异化适配，以及产业合作与生态协同。</p>
+      </div>
+      <div class="industry-rank module-summary-2x2">
+        <article>
+          <strong>验证与认证</strong>
+          <span>设计院数字化图纸、重工数字交付、船级社检验流程拉通；仿真、船模、中试、海试链条。</span>
+        </article>
+        <article>
+          <strong>双端适配</strong>
+          <span>新造船标准套餐与营运船改造路径、投资回报与停机窗口约束。</span>
+        </article>
+        <article>
+          <strong>人才与合作</strong>
+          <span>智能化船员培训研究；对外合作与生态占位。</span>
+        </article>
+      </div>
+      <div class="module-detail-root" data-module-detail="lifecycle"></div>
+    </section>
+
+    <section class="section dark-section" id="research">
+      <div class="section-heading wide">
+        <p class="eyebrow">12 / Research</p>
+        <h2>科研攻关：技术路径与验证治理全文</h2>
+        <p>本节围绕<strong>验证体系、标准规则与成果治理</strong>：按课题列攻关目标、任务与功能分解、关键设备与关键技术、实现路径、实施主体与资源、人员能力与集团协同。</p>
+      </div>
+      <div id="research-plan-root" class="research-plan-root"></div>
+    </section>
+
+    <footer class="section ship-footer" style="padding-top: 48px; padding-bottom: 48px;">
+      <div class="section-heading wide">
+        <p class="eyebrow">说明</p>
+        <h2>船舶一张图</h2>
+        <p>本站点用于智能船舶业务与能力的<strong>结构化呈现</strong>；内容随项目迭代更新。</p>
+        <p style="margin-top: 16px; color: var(--faint); font-size: 14px;">© 船舶一张图 · 资料展示</p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="./script.js"></script>
+  <script src="./content-plan-research.js"></script>
+  <script src="./module-detail-data.js"></script>
+  <script src="./requirements-data.js"></script>
+  <script src="./requirements-list.js"></script>
+  <script src="./research-plan.js"></script>
+  <script src="./module-detail.js"></script>
+</body>
+</html>
